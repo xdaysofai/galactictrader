@@ -1,0 +1,159 @@
+.hud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  pointer-events: none;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.buttonPanel {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  pointer-events: auto;
+  margin-top: auto;
+  margin-bottom: 1rem;
+}
+
+.buttonPanel button {
+  background-color: rgba(0, 30, 60, 0.7);
+  color: #00ccff;
+  border: 1px solid #00ccff;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-shadow: 0 0 5px #00ccff;
+  box-shadow: 0 0 10px rgba(0, 204, 255, 0.3);
+}
+
+.buttonPanel button:hover {
+  background-color: rgba(0, 50, 100, 0.8);
+  box-shadow: 0 0 15px rgba(0, 204, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.modalContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.modalContainer .modalOverlay {
+  pointer-events: auto;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  cursor: pointer;
+}
+
+/* Make all direct children of modalOverlay not inherit cursor pointer */
+.modalOverlay > * {
+  cursor: default;
+}
+
+.globalCloseButton {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 30, 60, 0.8);
+  color: white;
+  border: 2px solid #00ccff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 200;
+  pointer-events: auto;
+  box-shadow: 0 0 15px rgba(0, 204, 255, 0.5);
+}
+
+.globalCloseButton:hover {
+  background-color: rgba(0, 60, 100, 0.9);
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0, 204, 255, 0.7);
+}
+
+.statsPanel {
+  pointer-events: auto;
+  background-color: rgba(0, 20, 40, 0.7);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(0, 204, 255, 0.3);
+  border-radius: 8px;
+  padding: 1rem;
+  color: white;
+  width: 300px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.mainStats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.statLabel {
+  font-size: 0.85rem;
+  color: #aaccff;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+.statValue {
+  font-size: 1.2rem;
+  color: #ffffff;
+  font-weight: 600;
+  text-shadow: 0 0 5px rgba(0, 204, 255, 0.5);
+}
+
+.progressBar {
+  height: 8px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: #00ccff;
+  border-radius: 4px;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.cargoText {
+  font-size: 0.75rem;
+  color: #ffffff;
+  margin-top: 0.15rem;
+  text-align: right;
+} 

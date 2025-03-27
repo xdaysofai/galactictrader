@@ -1,0 +1,198 @@
+.planetInfo {
+  position: absolute;
+  bottom: 5rem;
+  right: 1rem;
+  width: 320px;
+  background-color: rgba(0, 10, 30, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 150, 255, 0.3);
+  padding: 1rem;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 150, 255, 0.3);
+  overflow: hidden;
+  z-index: 9;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(0, 150, 255, 0.3);
+  padding-bottom: 0.75rem;
+}
+
+.planetName {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(0, 150, 255, 0.5);
+}
+
+.planetType {
+  background-color: rgba(0, 150, 255, 0.2);
+  border: 1px solid rgba(0, 150, 255, 0.5);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #99ccff;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+.description {
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #cccccc;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.detailItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.label {
+  font-size: 0.7rem;
+  color: #99ccff;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+.value {
+  font-size: 0.9rem;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.resourcesTitle {
+  font-size: 0.8rem;
+  color: #99ccff;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+.resources {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.resource {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.resourceHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.resourceName {
+  font-size: 0.8rem;
+  color: #ffffff;
+}
+
+.abundanceValue {
+  font-size: 0.7rem;
+  color: #aaccff;
+}
+
+.abundanceBar {
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.abundanceFill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background-color: rgba(255, 50, 50, 0.5);
+  transform: scale(1.1);
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 150, 255, 0.3);
+}
+
+.tradeButton {
+  background-color: rgba(0, 150, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(0, 150, 255, 0.5);
+  border-radius: 4px;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+.tradeButton:hover {
+  background-color: rgba(0, 150, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.tradeButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .planetInfo {
+    width: 280px;
+    bottom: 4rem;
+  }
+  
+  .planetName {
+    font-size: 1.2rem;
+  }
+  
+  .description {
+    font-size: 0.8rem;
+  }
+} 

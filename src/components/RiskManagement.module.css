@@ -1,0 +1,351 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 30;
+}
+
+.riskManagement {
+  width: 90%;
+  max-width: 700px;
+  background-color: rgba(0, 15, 35, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 100, 255, 0.4);
+  color: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 100, 255, 0.3);
+  overflow: hidden;
+  padding: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 30, 60, 0.8);
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(0, 100, 255, 0.4);
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #66ccff;
+  text-shadow: 0 0 10px rgba(0, 150, 255, 0.5);
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: #99ccff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 1rem;
+  line-height: 1;
+}
+
+.closeButton:hover {
+  color: white;
+}
+
+.routeSelection {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(0, 100, 255, 0.2);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.planetInfo h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: #99ccff;
+}
+
+.route {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  background-color: rgba(0, 40, 80, 0.4);
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 100, 255, 0.2);
+}
+
+.planet {
+  font-weight: 600;
+  color: white;
+}
+
+.arrow {
+  color: #66ccff;
+  font-size: 1.2rem;
+}
+
+.distance {
+  margin-left: auto;
+  background-color: rgba(0, 60, 120, 0.6);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #99ccff;
+}
+
+.noRoute {
+  color: #999;
+  padding: 1rem;
+  text-align: center;
+  background-color: rgba(0, 40, 80, 0.4);
+  border-radius: 6px;
+  border: 1px solid rgba(0, 100, 255, 0.2);
+}
+
+.cargoSelection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formGroup label {
+  font-size: 0.9rem;
+  color: #99ccff;
+}
+
+.select, .input {
+  background-color: rgba(0, 40, 80, 0.6);
+  border: 1px solid rgba(0, 100, 255, 0.4);
+  padding: 0.75rem;
+  border-radius: 4px;
+  color: white;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.select:focus, .input:focus {
+  outline: none;
+  border-color: #66ccff;
+  box-shadow: 0 0 0 2px rgba(102, 204, 255, 0.3);
+}
+
+.assessmentResults {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(0, 100, 255, 0.2);
+}
+
+.summaryRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.summaryBox {
+  background-color: rgba(0, 30, 60, 0.5);
+  border: 1px solid rgba(0, 100, 255, 0.3);
+  border-radius: 6px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.summaryLabel {
+  font-size: 0.9rem;
+  color: #99ccff;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+.summaryValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.detailsSection {
+  background-color: rgba(0, 25, 50, 0.4);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.sectionTitle {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: #99ccff;
+}
+
+.riskFactors {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.riskFactor {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.factorName {
+  width: 120px;
+  font-size: 0.9rem;
+  color: #eee;
+}
+
+.factorBarContainer {
+  flex-grow: 1;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.factorBar {
+  height: 100%;
+  transition: width 0.5s ease, background-color 0.5s ease;
+}
+
+.factorValue {
+  width: 40px;
+  font-size: 0.8rem;
+  text-align: right;
+  color: #99ccff;
+}
+
+.probabilitySection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: rgba(0, 30, 60, 0.3);
+  border-radius: 6px;
+}
+
+.probability {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.probLabel {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.probValue {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #99ccff;
+}
+
+.recommendation {
+  padding: 1rem;
+  background-color: rgba(0, 30, 60, 0.3);
+  border-radius: 6px;
+  border-left: 4px solid #66ccff;
+}
+
+.recommendation h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #99ccff;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+.recommendation p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #eee;
+}
+
+.actions {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.analyzeButton, .actions .closeButton {
+  background-color: rgba(0, 80, 160, 0.7);
+  color: white;
+  border: 1px solid rgba(102, 204, 255, 0.5);
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.analyzeButton {
+  background-color: rgba(0, 120, 210, 0.7);
+}
+
+.analyzeButton:hover, .actions .closeButton:hover {
+  background-color: rgba(0, 140, 255, 0.8);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.mobileCloseButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 200;
+  font-size: 18px;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .routeSelection {
+    grid-template-columns: 1fr;
+  }
+  
+  .summaryRow {
+    grid-template-columns: 1fr;
+  }
+  
+  .riskFactor {
+    flex-wrap: wrap;
+  }
+  
+  .factorName {
+    width: 100%;
+    margin-bottom: 0.25rem;
+  }
+  
+  .mobileCloseButton {
+    display: flex;
+  }
+  
+  .header .closeButton {
+    display: none;
+  }
+} 
