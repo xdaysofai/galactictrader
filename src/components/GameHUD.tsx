@@ -12,7 +12,7 @@ import { GameState } from '../utils/saveSystem';
 import { PlayerInventory, ResourceTypeValues, ResourceType } from '@/types/galaxy';
 import { soundManager, SoundType } from '@/utils/soundManager';
 import styles from './GameHUD.module.css';
-import { SoundSettings } from './SoundSettings';
+import SoundSettings from './SoundSettings';
 
 // Define the available resources here to use in trading
 const AVAILABLE_RESOURCES = [
@@ -150,6 +150,80 @@ const CargoInventory = ({ inventory, onClose }: { inventory: PlayerInventory, on
   );
 };
 
+// Info Button Component
+const InfoButton = ({ onClick }: { onClick: () => void }) => {
+  return (
+    <button 
+      className={styles.infoButton}
+      onClick={onClick}
+      aria-label="How to play"
+    >
+      i
+    </button>
+  );
+};
+
+// Game Instructions Component (reused from GameInterface)
+const GameInstructions = ({ onClose }: { onClose: () => void }) => {
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50" onClick={onClose}>
+      <div 
+        className="bg-gray-800 rounded-lg p-6 max-w-3xl w-full relative border border-gray-700"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold text-white">How to Play Galactic Trader</h2>
+          <button
+            onClick={onClose}
+            className="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded-md flex items-center"
+            aria-label="Close instructions"
+          >
+            <span className="mr-1">Close</span>
+            <span className="text-lg">×</span>
+          </button>
+        </div>
+        
+        <div className="space-y-6 text-white">
+          <section>
+            <h3 className="text-xl text-purple-400 font-semibold mb-2">Game Objective</h3>
+            <p className="text-gray-200">Become the most successful trader in the galaxy by buying low, selling high, and completing profitable missions across the cosmos.</p>
+          </section>
+
+          <section>
+            <h3 className="text-xl text-purple-400 font-semibold mb-2">Core Mechanics</h3>
+            <ul className="space-y-2 list-disc pl-5">
+              <li><span className="text-blue-400 font-medium">Trading:</span> Visit different planets to buy and sell resources. Prices vary based on supply and demand.</li>
+              <li><span className="text-blue-400 font-medium">Space Travel:</span> Navigate between planets, consuming fuel with each journey.</li>
+              <li><span className="text-blue-400 font-medium">Ship Management:</span> Upgrade your ship's components to improve performance and cargo capacity.</li>
+              <li><span className="text-blue-400 font-medium">Missions:</span> Accept missions from the mission board to earn credits and reputation.</li>
+              <li><span className="text-blue-400 font-medium">Risk Management:</span> Balance high-risk, high-reward opportunities with safer ventures.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3 className="text-xl text-purple-400 font-semibold mb-2">Controls</h3>
+            <ul className="space-y-2 list-disc pl-5">
+              <li><span className="text-blue-400 font-medium">Click on Planets:</span> Select a destination to travel to</li>
+              <li><span className="text-blue-400 font-medium">HUD Buttons:</span> Access trading, ship management, and missions</li>
+              <li><span className="text-blue-400 font-medium">ESC:</span> Open settings menu</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3 className="text-xl text-purple-400 font-semibold mb-2">Tips for New Traders</h3>
+            <ul className="space-y-2 list-disc pl-5">
+              <li>Start with safe, legal cargo before risking contraband</li>
+              <li>Always maintain enough fuel for your return journey</li>
+              <li>Upgrade your cargo capacity early for more profitable runs</li>
+              <li>Watch for price differences between planets to maximize profits</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 interface GameHUDProps {
   playerStats: {
     credits: number;
@@ -179,6 +253,7 @@ export const GameHUD: React.FC<GameHUDProps> = ({ playerStats, setPlayerStats })
   const [showShortcuts, setShowShortcuts] = useState(false);
   const [showRiskManagement, setShowRiskManagement] = useState(false);
   const [showCargoInventory, setShowCargoInventory] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(false);
   const [components, setComponents] = useState(createInitialComponents());
   const [missionLog, setMissionLog] = useState({ activeMissions: [], completedMissions: [] });
   const [playerReputation, setPlayerReputation] = useState(0);
@@ -238,7 +313,8 @@ export const GameHUD: React.FC<GameHUDProps> = ({ playerStats, setPlayerStats })
 
   const handleCloseAll = () => {
     if (showShipManagement || showTrading || showMissions || 
-        showSettings || showShortcuts || showRiskManagement || showCargoInventory) {
+        showSettings || showShortcuts || showRiskManagement || 
+        showCargoInventory || showInstructions) {
       soundManager.playSound(SoundType.MENU_CLOSE);
     }
     
@@ -249,6 +325,7 @@ export const GameHUD: React.FC<GameHUDProps> = ({ playerStats, setPlayerStats })
     setShowShortcuts(false);
     setShowRiskManagement(false);
     setShowCargoInventory(false);
+    setShowInstructions(false);
   };
 
   const handleCloseShipManagement = (e?: React.MouseEvent) => {
@@ -321,6 +398,27 @@ export const GameHUD: React.FC<GameHUDProps> = ({ playerStats, setPlayerStats })
     soundManager.playSound(SoundType.MENU_CLOSE);
   };
 
+  const handleCloseInstructions = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    console.log("Closing instructions");
+    setShowInstructions(false);
+    soundManager.playSound(SoundType.MENU_CLOSE);
+  };
+
+  const handleShowInstructions = () => {
+    // Close any other open interfaces
+    handleCloseAll();
+    
+    // Play sound when opening
+    soundManager.playSound(SoundType.MENU_OPEN);
+    
+    // Show instructions
+    setShowInstructions(true);
+  };
+
   const handleOpenInterface = (interfaceType: 'ship' | 'trade' | 'missions' | 'risk' | 'settings' | 'help' | 'cargo') => {
     // Close any other open interface first
     handleCloseAll();
@@ -369,7 +467,7 @@ export const GameHUD: React.FC<GameHUDProps> = ({ playerStats, setPlayerStats })
     handleCloseAll();
   };
 
-  const handleTrade = (resourceType: string, quantity: number, isBuying: boolean) => {
+  const handleTrade = (resourceType: ResourceTypeValues, quantity: number, isBuying: boolean) => {
     // Debug: log initial function call
     console.log('handleTrade called:', { resourceType, quantity, isBuying });
     console.log('Current state:', { 
@@ -391,18 +489,35 @@ export const GameHUD: React.FC<GameHUDProps> = ({ playerStats, setPlayerStats })
     
     // Update player inventory
     setInventory(prev => {
-      const current = prev[resourceType as ResourceTypeValues] || 0;
+      const current = prev[resourceType] || 0;
       const updated = {
         ...prev,
-        [resourceType as ResourceTypeValues]: isBuying ? current + quantity : Math.max(0, current - quantity)
+        [resourceType]: isBuying ? current + quantity : Math.max(0, current - quantity)
       };
       
-      // If the resource quantity is 0 after selling, remove it from inventory
-      if (updated[resourceType as ResourceTypeValues] === 0) {
-        delete updated[resourceType as ResourceTypeValues];
+      // For buying, check if we have credits and cargo space
+      if (isBuying) {
+        if (totalAmount > playerStats.credits) {
+          soundManager.playSound(SoundType.BUTTON_CLICK);
+          console.error('Not enough credits!');
+          return prev; // Don't update if we can't afford it
+        }
+        
+        const newUsedSpace = Object.values(updated).reduce((sum, amount) => sum + amount, 0);
+        if (newUsedSpace > playerStats.cargoSpace.total) {
+          soundManager.playSound(SoundType.BUTTON_CLICK);
+          console.error('Not enough cargo space!');
+          return prev; // Don't update if we're out of space
+        }
       }
       
-      console.log("Updated inventory:", updated);
+      // Play appropriate sound
+      if (isBuying) {
+        soundManager.playSound(SoundType.TRADE_SUCCESS);
+      } else {
+        soundManager.playSound(SoundType.TRADE_SUCCESS);
+      }
+      
       return updated;
     });
     
@@ -426,9 +541,6 @@ export const GameHUD: React.FC<GameHUDProps> = ({ playerStats, setPlayerStats })
       console.log('Updated player stats:', newStats);
       return newStats;
     });
-    
-    // Play transaction sound
-    soundManager.playSound(isBuying ? SoundType.PURCHASE : SoundType.SELL);
     
     console.log(`${isBuying ? 'Bought' : 'Sold'} ${quantity} ${resourceType} for ${totalAmount} credits`);
     
@@ -495,6 +607,9 @@ export const GameHUD: React.FC<GameHUDProps> = ({ playerStats, setPlayerStats })
 
   return (
     <div className={styles.hud}>
+      {/* Info Button */}
+      <InfoButton onClick={handleShowInstructions} />
+
       <div className={styles.statsPanel}>
         <div className={styles.mainStats}>
           <div className={styles.stat}>
@@ -553,7 +668,6 @@ export const GameHUD: React.FC<GameHUDProps> = ({ playerStats, setPlayerStats })
         <button onClick={() => handleOpenInterface('cargo')}>Cargo</button>
       </div>
 
-      {/* Use a single unified z-index */}
       <div className={styles.modalContainer}>
         <AnimatePresence>
           {showShipManagement && (
@@ -714,12 +828,31 @@ export const GameHUD: React.FC<GameHUDProps> = ({ playerStats, setPlayerStats })
               />
             </motion.div>
           )}
+
+          {showInstructions && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className={styles.modalOverlay}
+              onClick={(e) => {
+                // Close only if clicking directly on the overlay
+                if (e.target === e.currentTarget) {
+                  handleCloseInstructions();
+                }
+              }}
+            >
+              <GameInstructions onClose={handleCloseInstructions} />
+            </motion.div>
+          )}
         </AnimatePresence>
       </div>
       
       {/* Global close button that's always accessible when any modal is open */}
       {(showShipManagement || showTrading || showMissions || 
-        showSettings || showShortcuts || showRiskManagement || showCargoInventory) && (
+        showSettings || showShortcuts || showRiskManagement || 
+        showCargoInventory || showInstructions) && (
         <button 
           className={styles.globalCloseButton}
           onClick={handleCloseAll}
