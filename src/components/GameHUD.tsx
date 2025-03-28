@@ -168,11 +168,11 @@ const GameInstructions = ({ onClose }: { onClose: () => void }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50" onClick={onClose}>
       <div 
-        className="bg-gray-800 rounded-lg p-6 max-w-3xl w-full relative border border-gray-700"
+        className="bg-gray-800 rounded-lg p-4 p-6 max-w-3xl w-full relative border border-gray-700 max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-white">How to Play Galactic Trader</h2>
+        <div className="flex justify-between items-center mb-4 sticky top-0 bg-gray-800 py-2 border-b border-gray-700">
+          <h2 className="text-xl md:text-2xl font-bold text-white">How to Play Galactic Trader</h2>
           <button
             onClick={onClose}
             className="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded-md flex items-center"
@@ -183,14 +183,14 @@ const GameInstructions = ({ onClose }: { onClose: () => void }) => {
           </button>
         </div>
         
-        <div className="space-y-6 text-white">
+        <div className="space-y-4 md:space-y-6 text-white">
           <section>
-            <h3 className="text-xl text-purple-400 font-semibold mb-2">Game Objective</h3>
+            <h3 className="text-lg md:text-xl text-purple-400 font-semibold mb-2">Game Objective</h3>
             <p className="text-gray-200">Become the most successful trader in the galaxy by buying low, selling high, and completing profitable missions across the cosmos.</p>
           </section>
 
           <section>
-            <h3 className="text-xl text-purple-400 font-semibold mb-2">Core Mechanics</h3>
+            <h3 className="text-lg md:text-xl text-purple-400 font-semibold mb-2">Core Mechanics</h3>
             <ul className="space-y-2 list-disc pl-5">
               <li><span className="text-blue-400 font-medium">Trading:</span> Visit different planets to buy and sell resources. Prices vary based on supply and demand.</li>
               <li><span className="text-blue-400 font-medium">Space Travel:</span> Navigate between planets, consuming fuel with each journey.</li>
@@ -201,23 +201,43 @@ const GameInstructions = ({ onClose }: { onClose: () => void }) => {
           </section>
 
           <section>
-            <h3 className="text-xl text-purple-400 font-semibold mb-2">Controls</h3>
-            <ul className="space-y-2 list-disc pl-5">
+            <h3 className="text-lg md:text-xl text-purple-400 font-semibold mb-2">Controls</h3>
+            <div className="mb-2 text-gray-200">
+              <span className="font-medium">Desktop:</span>
+            </div>
+            <ul className="space-y-2 list-disc pl-5 mb-4">
               <li><span className="text-blue-400 font-medium">Click on Planets:</span> Select a destination to travel to</li>
               <li><span className="text-blue-400 font-medium">HUD Buttons:</span> Access trading, ship management, and missions</li>
               <li><span className="text-blue-400 font-medium">ESC:</span> Open settings menu</li>
             </ul>
+            
+            <div className="mb-2 text-gray-200">
+              <span className="font-medium">Mobile/Touch:</span>
+            </div>
+            <ul className="space-y-2 list-disc pl-5">
+              <li><span className="text-blue-400 font-medium">Tap on Planets:</span> Select a destination to travel to</li>
+              <li><span className="text-blue-400 font-medium">Tap and Drag:</span> Navigate the galaxy view</li>
+              <li><span className="text-blue-400 font-medium">Pinch:</span> Zoom in and out of the galaxy view</li>
+              <li><span className="text-blue-400 font-medium">Double Tap:</span> Quick select destinations</li>
+              <li><span className="text-blue-400 font-medium">Bottom Buttons:</span> Access game features</li>
+            </ul>
           </section>
 
           <section>
-            <h3 className="text-xl text-purple-400 font-semibold mb-2">Tips for New Traders</h3>
+            <h3 className="text-lg md:text-xl text-purple-400 font-semibold mb-2">Tips for New Traders</h3>
             <ul className="space-y-2 list-disc pl-5">
               <li>Start with safe, legal cargo before risking contraband</li>
               <li>Always maintain enough fuel for your return journey</li>
               <li>Upgrade your cargo capacity early for more profitable runs</li>
               <li>Watch for price differences between planets to maximize profits</li>
+              <li>On mobile, use portrait mode for interfaces and landscape for exploration</li>
             </ul>
           </section>
+
+          <div className="mt-4 pt-4 border-t border-gray-700 text-gray-400 text-sm">
+            <p>Tip: Access this help anytime by tapping the "i" button in the top-right corner</p>
+            <p>For the best experience on mobile, play in landscape orientation with a stable internet connection</p>
+          </div>
         </div>
       </div>
     </div>

@@ -3,6 +3,14 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --primary: #0a192f;
+  --secondary: #20314f;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --touch-target: 44px; /* Minimum touch target size */
 }
 
 @theme inline {
@@ -16,11 +24,76 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --primary: #0a192f;
+    --secondary: #20314f;
   }
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overscroll-behavior: none; /* Prevent bounce effects */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* Remove tap highlight on iOS */
+  touch-action: manipulation; /* Improve touch responsiveness */
+  user-select: none; /* Prevent text selection for better touch experience */
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Improve scrolling performance */
+* {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Proper sizing for touch targets */
+button, 
+a, 
+input[type="button"], 
+input[type="submit"], 
+input[type="reset"], 
+input[type="checkbox"],
+input[type="radio"] {
+  min-height: var(--touch-target);
+  min-width: var(--touch-target);
+}
+
+/* Optimize input fields for touch */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+  font-size: 16px; /* Prevent iOS zoom on focus */
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+/* Hide caret and scrollbar on mobile for better performance */
+@media (max-width: 768px) {
+  * {
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  *::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+  }
+  
+  * {
+    caret-color: transparent;
+  }
+  
+  input, textarea {
+    caret-color: auto; /* Re-enable caret for inputs */
+  }
 }
