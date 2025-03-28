@@ -25,6 +25,7 @@ interface GameSceneProps {
       total: number;
     };
   }>>;
+  gameStarted?: boolean;
 }
 
 interface CelestialBody {
@@ -72,7 +73,7 @@ interface GameState {
   health: number;
 }
 
-export const GameScene: React.FC<GameSceneProps> = ({ setPlayerStats }) => {
+export const GameScene: React.FC<GameSceneProps> = ({ setPlayerStats, gameStarted = false }) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene>();
   const cameraRef = useRef<THREE.PerspectiveCamera>();
@@ -435,16 +436,21 @@ export const GameScene: React.FC<GameSceneProps> = ({ setPlayerStats }) => {
 
   // Initialize sound system
   useEffect(() => {
+    // Always initialize sounds so they're ready
     soundManager.init();
-    soundManager.playMusic(SoundType.AMBIENT_SPACE);
-    soundManager.playSound(SoundType.ENGINE_HUM);
+    
+    // Only play sounds when the game has started
+    if (gameStarted) {
+      soundManager.playMusic(SoundType.AMBIENT_SPACE);
+      soundManager.playSound(SoundType.ENGINE_HUM);
+    }
     
     return () => {
       // Cleanup sounds when component unmounts
       soundManager.stopSound(SoundType.ENGINE_HUM);
       soundManager.stopSound(SoundType.AMBIENT_SPACE);
     };
-  }, []);
+  }, [gameStarted]);
 
   // Update engine sound based on ship speed
   useEffect(() => {

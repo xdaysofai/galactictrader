@@ -12,6 +12,35 @@
   height: 100vh;
 }
 
+.infoButton {
+  position: fixed;
+  top: 20px;
+  right: 80px;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 30, 60, 0.8);
+  color: #00ccff;
+  border: 2px solid #00ccff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  font-style: italic;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 200;
+  pointer-events: auto;
+  box-shadow: 0 0 15px rgba(0, 204, 255, 0.5);
+}
+
+.infoButton:hover {
+  background-color: rgba(0, 60, 100, 0.9);
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0, 204, 255, 0.7);
+}
+
 .buttonPanel {
   display: flex;
   justify-content: center;
@@ -19,6 +48,7 @@
   pointer-events: auto;
   margin-top: auto;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 
 .buttonPanel button {
@@ -32,12 +62,22 @@
   transition: all 0.2s ease;
   text-shadow: 0 0 5px #00ccff;
   box-shadow: 0 0 10px rgba(0, 204, 255, 0.3);
+  min-width: 80px;
+  min-height: 44px;
+  margin-bottom: 8px;
+  -webkit-tap-highlight-color: rgba(0, 204, 255, 0.3);
+  touch-action: manipulation;
 }
 
 .buttonPanel button:hover {
   background-color: rgba(0, 50, 100, 0.8);
   box-shadow: 0 0 15px rgba(0, 204, 255, 0.5);
   transform: translateY(-2px);
+}
+
+.buttonPanel button:active {
+  transform: translateY(1px);
+  background-color: rgba(0, 60, 120, 0.9);
 }
 
 .modalContainer {
@@ -63,19 +103,23 @@
   align-items: center;
   z-index: 50;
   cursor: pointer;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* Make all direct children of modalOverlay not inherit cursor pointer */
 .modalOverlay > * {
   cursor: default;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .globalCloseButton {
   position: fixed;
   top: 20px;
   right: 20px;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   background-color: rgba(0, 30, 60, 0.8);
   color: white;
   border: 2px solid #00ccff;
@@ -89,12 +133,17 @@
   z-index: 200;
   pointer-events: auto;
   box-shadow: 0 0 15px rgba(0, 204, 255, 0.5);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .globalCloseButton:hover {
   background-color: rgba(0, 60, 100, 0.9);
   transform: scale(1.1);
   box-shadow: 0 0 20px rgba(0, 204, 255, 0.7);
+}
+
+.globalCloseButton:active {
+  transform: scale(0.95);
 }
 
 .statsPanel {
@@ -107,6 +156,7 @@
   color: white;
   width: 300px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  max-width: calc(100% - 2rem);
 }
 
 .mainStats {
@@ -137,7 +187,7 @@
 }
 
 .progressBar {
-  height: 8px;
+  height: 10px;
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 4px;
   overflow: hidden;
@@ -156,4 +206,47 @@
   color: #ffffff;
   margin-top: 0.15rem;
   text-align: right;
+}
+
+@media (max-width: 768px) {
+  .buttonPanel {
+    justify-content: center;
+    padding: 0 10px;
+  }
+  
+  .buttonPanel button {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    min-width: 70px;
+  }
+  
+  .infoButton {
+    top: 15px;
+    right: 70px;
+  }
+  
+  .globalCloseButton {
+    top: 15px;
+    right: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .statsPanel {
+    padding: 0.75rem;
+  }
+  
+  .statValue {
+    font-size: 1rem;
+  }
+  
+  .buttonPanel {
+    gap: 0.5rem;
+  }
+  
+  .buttonPanel button {
+    font-size: 0.8rem;
+    min-width: 60px;
+    margin-bottom: 5px;
+  }
 } 
