@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './GameInterface.module.css';
+import { soundManager, SoundType } from '@/utils/soundManager';
 
 interface GameInterfaceProps {
   onStartGame: () => void;
@@ -8,6 +9,26 @@ interface GameInterfaceProps {
 
 export const GameInterface: React.FC<GameInterfaceProps> = ({ onStartGame }) => {
   const [showInstructions, setShowInstructions] = useState(false);
+
+  // Initialize sound system (but don't play background music)
+  React.useEffect(() => {
+    soundManager.init();
+  }, []);
+
+  const handleStartGame = () => {
+    soundManager.playSound(SoundType.BUTTON_CLICK);
+    onStartGame();
+  };
+
+  const handleShowInstructions = () => {
+    soundManager.playSound(SoundType.BUTTON_CLICK);
+    setShowInstructions(true);
+  };
+
+  const handleCloseInstructions = () => {
+    soundManager.playSound(SoundType.BUTTON_CLICK);
+    setShowInstructions(false);
+  };
 
   return (
     <div className={styles.container}>
@@ -28,17 +49,20 @@ export const GameInterface: React.FC<GameInterfaceProps> = ({ onStartGame }) => 
         >
           <button 
             className={styles.startButton}
-            onClick={onStartGame}
+            onClick={handleStartGame}
           >
             Launch Game
           </button>
           <button 
             className={styles.howToPlayButton}
-            onClick={() => setShowInstructions(true)}
+            onClick={handleShowInstructions}
           >
             How to Play
           </button>
-          <button className={styles.optionsButton}>
+          <button 
+            className={styles.optionsButton}
+            onClick={() => soundManager.playSound(SoundType.BUTTON_CLICK)}
+          >
             Options
           </button>
         </motion.div>
@@ -51,7 +75,7 @@ export const GameInterface: React.FC<GameInterfaceProps> = ({ onStartGame }) => 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setShowInstructions(false)}
+            onClick={handleCloseInstructions}
           >
             <motion.div 
               className={styles.instructionsModal}
@@ -101,7 +125,7 @@ export const GameInterface: React.FC<GameInterfaceProps> = ({ onStartGame }) => 
 
               <button 
                 className={styles.closeButton}
-                onClick={() => setShowInstructions(false)}
+                onClick={handleCloseInstructions}
               >
                 Close
               </button>

@@ -43,7 +43,7 @@ export default function Home() {
 
   return (
     <main>
-      <GameScene setPlayerStats={setPlayerStats} />
+      <GameScene setPlayerStats={setPlayerStats} gameStarted={gameStarted} />
       {!gameStarted && <GameInterface onStartGame={handleStartGame} />}
       {gameStarted && (
         <GameHUD 
