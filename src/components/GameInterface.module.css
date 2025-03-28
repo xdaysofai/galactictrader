@@ -36,7 +36,9 @@
 }
 
 .startButton,
-.optionsButton {
+.optionsButton,
+.howToPlayButton,
+.closeButton {
   padding: 0.75rem 2rem;
   font-size: 1.1rem;
   border: none;
@@ -52,13 +54,17 @@
 }
 
 .startButton:hover,
-.optionsButton:hover {
+.optionsButton:hover,
+.howToPlayButton:hover,
+.closeButton:hover {
   transform: translateY(-2px);
   box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
 }
 
 .startButton::before,
-.optionsButton::before {
+.optionsButton::before,
+.howToPlayButton::before,
+.closeButton::before {
   content: '';
   position: absolute;
   top: 0;
@@ -75,11 +81,121 @@
 }
 
 .startButton:hover::before,
-.optionsButton:hover::before {
+.optionsButton:hover::before,
+.howToPlayButton:hover::before,
+.closeButton:hover::before {
   left: 100%;
 }
 
 .optionsButton {
   background: transparent;
   border: 2px solid #3b82f6;
+}
+
+.howToPlayButton {
+  background: linear-gradient(90deg, #4c1d95, #7c3aed);
+  border: none;
+  position: relative;
+}
+
+.howToPlayButton::after {
+  content: '?';
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  font-weight: bold;
+  opacity: 0.8;
+}
+
+.instructionsOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.instructionsModal {
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border-radius: 1rem;
+  padding: 2rem;
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.2);
+  overflow-y: auto;
+  position: relative;
+}
+
+.instructionsTitle {
+  font-size: 2rem;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(124, 58, 237, 0.3);
+  padding-bottom: 1rem;
+}
+
+.instructionsContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.instructionSection h3 {
+  font-size: 1.5rem;
+  color: #a78bfa;
+  margin-bottom: 0.75rem;
+}
+
+.instructionSection p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #e2e8f0;
+}
+
+.instructionSection ul {
+  list-style: none;
+  padding-left: 0.5rem;
+}
+
+.instructionSection li {
+  margin-bottom: 0.75rem;
+  color: #e2e8f0;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.instructionSection li::before {
+  content: '•';
+  color: #7c3aed;
+  position: absolute;
+  left: 0;
+  font-size: 1.2rem;
+}
+
+.mechanic, .control {
+  color: #a78bfa;
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.closeButton {
+  display: block;
+  margin: 2rem auto 0;
+  padding: 0.6rem 1.5rem;
+  background: linear-gradient(90deg, #4c1d95, #7c3aed);
+  font-size: 1rem;
+  width: 150px;
 } 
